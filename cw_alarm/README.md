@@ -1,8 +1,9 @@
-# Useful commands
+# Steps to Deploy
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+|Command|Description|
+|-----|-----|
+|`npm install package.json`|   install node-modules|
+|`npm update`|                 update node-modules|
+|`npm run build`|             build the application to JS|
+|`cdk synth`|                  emits the synthesized CloudFormation template|
+|`cdk deploy '*Stack'`|        deploys stacks with the name ending with 'Stack'|

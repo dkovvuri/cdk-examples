@@ -1,0 +1,51 @@
+{
+  "vpc-provider:account=675383074689:filter.vpc-id=vpc-4e352e36:region=us-east-1": {
+    "vpcId": "vpc-4e352e36",
+    "availabilityZones": [
+      "us-east-1a",
+      "us-east-1b",
+      "us-east-1c",
+      "us-east-1d",
+      "us-east-1e",
+      "us-east-1f"
+    ],
+    "privateSubnetIds": [
+      "subnet-08e768f689d475c8d",
+      "subnet-0a3692fc593c05965",
+      "subnet-0ab52ca7387bfa8eb",
+      "subnet-0b08f9599d1d0c71b",
+      "subnet-0be37c4ac7d07b863",
+      "subnet-07b383d0644ab80fb"
+    ],
+    "privateSubnetNames": [
+      "Private"
+    ],
+    "privateSubnetRouteTableIds": [
+      "rtb-59987c26",
+      "rtb-59987c26",
+      "rtb-59987c26",
+      "rtb-59987c26",
+      "rtb-59987c26",
+      "rtb-59987c26"
+    ],
+    "publicSubnetIds": [
+      "subnet-a333438c",
+      "subnet-13675e58",
+      "subnet-d2e7928f",
+      "subnet-a78fadc3",
+      "subnet-502e566f",
+      "subnet-04f8020b"
+    ],
+    "publicSubnetNames": [
+      "Public"
+    ],
+    "publicSubnetRouteTableIds": [
+      "rtb-9b997de4",
+      "rtb-9b997de4",
+      "rtb-9b997de4",
+      "rtb-9b997de4",
+      "rtb-9b997de4",
+      "rtb-9b997de4"
+    ]
+  }
+}

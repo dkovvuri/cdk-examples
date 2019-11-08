@@ -1,2 +1,0 @@
-# cdk-examples
-CDK Examples

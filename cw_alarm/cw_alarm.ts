@@ -36,8 +36,8 @@ class EC2InstanceAlarmStack extends cdk.Stack {
 
 }
 
-const envUSA  = { account: '675383074689', region: 'us-east-1' };
+const envUSA  = { account: '', region: '' };
 
 const app = new cdk.App();
 
-new EC2InstanceAlarmStack(app, "EC2withAlarm", {env: envUSA, vpcid: "vpc-4e352e36"});
+new EC2InstanceAlarmStack(app, "EC2withAlarm", {env: envUSA, vpcid: ""});

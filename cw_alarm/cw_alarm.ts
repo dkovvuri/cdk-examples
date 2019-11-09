@@ -5,36 +5,16 @@ import cdk = require('@aws-cdk/core');
 
 
 interface InstanceProps extends cdk.StackProps {
-    vpcid: string
+    instanceid: string
 }
 
-class EC2InstanceAlarmStack extends cdk.Stack {
+class Alarm extends cdk.Stack {
 
     constructor(app: cdk.App, id: string, props: InstanceProps) {
 
         super(app, id, props);
 
-        const vpc_id = props.vpcid;
-
-        const instance_type = new cdk.CfnParameter(this, "instancetype", {
-            type: "String",
-            default: "t2.large"
-        });
-
-        const keypair = new cdk.CfnParameter(this, "keypair", {
-            type: "AWS::EC2::KeyPair::KeyName",
-            default: "kovvuri"
-        });
-
-        const instance = new ec2.Instance(this, "Instance", {
-            instanceType: new ec2.InstanceType(instance_type.valueAsString),
-            machineImage: new ec2.AmazonLinuxImage(),
-            allowAllOutbound: true,
-            keyName: keypair.valueAsString,
-            vpc: ec2.Vpc.fromLookup(this, "vpc", { vpcId: vpc_id })
-
-        });
-
+        const instanceid = props.instanceid;
 
         // core.CfnResource(
         //     self,
@@ -55,45 +35,55 @@ class EC2InstanceAlarmStack extends cdk.Stack {
         //     },
         // )
 
-        const CPUAlarm = new cw.CfnAlarm(this, "cpualarm".concat(instance.toString()), {
+        const CPUAlarm = new cw.CfnAlarm(this, "cpualarm".concat(instanceid), {
             comparisonOperator: "GreaterThanThreshold",
             evaluationPeriods: 1,
-            period: 900,
+            datapointsToAlarm: 1,
+            threshold: 4,
+            treatMissingData: "missing",
             metrics: [
                 {
                     id: "m1",
-                    label: "CPUCreditUsage",
-                    returnData: true,
+                    label: "NetworkOut",
+                    returnData: false,
                     metricStat: {
                         metric: {
-                            metricName: "CPUCreditUsage",
+                            metricName: "NetworkOut",
                             namespace: "AWS/EC2",
                             dimensions: [{
                                 name: "InstanceId",
-                                value: instance.instanceId
+                                value: instanceid
                             }]
                         },
                         period: 300,
                         stat: "Average",
-                        unit: "Count",
+                        unit: "Bytes",
                     }
                 },
                 {
                     id: "m2",
                     label: "CPUCreditUsage",
+                    returnData: false,
                     metricStat: {
                         metric: {
-                            metricName: "CPUCreditUsage",
+                            metricName: "NetworkIn",
                             namespace: "AWS/EC2",
                             dimensions: [{
                                 name: "InstanceId",
-                                value: instance.instanceId
+                                value: instanceid
                             }]
                         },
                         period: 300,
                         stat: "Average",
-                        unit: "Count"
+                        unit: "Bytes"
                     }
+                },
+                {
+                    id: "e1",
+                    label: "NetworkUsageinMiB",
+                    returnData: true,
+                    expression: "SUM(METRICS())/(1024*1024)",
+                    
                 }
             ],
 
@@ -103,8 +93,6 @@ class EC2InstanceAlarmStack extends cdk.Stack {
 
 }
 
-const envUSA = { account: '675383074689', region: 'us-east-1' };
-
 const app = new cdk.App();
 
-new EC2InstanceAlarmStack(app, "EC2withAlarm", { env: envUSA, vpcid: "vpc-4e352e36" });
+new Alarm(app, "CloudWatchAlarm",{instanceid: "i-0cb9b6ad4c2884163"});

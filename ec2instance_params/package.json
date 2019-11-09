@@ -1,8 +1,8 @@
 {
-  "name": "cw_alarm",
-  "version": "0.1.0",
+  "name": "ec2instanceparams",
+  "version": "0.2.0",
   "bin": {
-    "cw_alarm": "cw_alaram.js"
+    "cw_alarm": "ec2instanceparams.js"
   },
   "scripts": {
     "build": "tsc",

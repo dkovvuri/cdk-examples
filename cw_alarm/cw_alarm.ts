@@ -16,25 +16,6 @@ class Alarm extends cdk.Stack {
 
         const instanceid = props.instanceid;
 
-        // core.CfnResource(
-        //     self,
-        //     id="SecurityDirectorAnyFailedLogins15MinutesAlarm",
-        //     type="AWS::CloudWatch::Alarm",
-        //     properties={
-        //         "ComparisonOperator": "GreaterThanThreshold",
-        //         "EvaluationPeriods": 1,
-        //         "Period": 900,
-        //         "Metrics": [
-        //             {
-        //                 "Expression": "SEARCH(' {SecurityDirector/FailedLogins, User} NOT \"ALL\" ', 'Maximum', 900)",
-        //                 "Id": "m1",
-        //                 "Label": "FailedLogins",
-        //                 "ReturnData": True,
-        //             }
-        //         ],
-        //     },
-        // )
-
         const CPUAlarm = new cw.CfnAlarm(this, "cpualarm".concat(instanceid), {
             comparisonOperator: "GreaterThanThreshold",
             evaluationPeriods: 1,
@@ -95,4 +76,4 @@ class Alarm extends cdk.Stack {
 
 const app = new cdk.App();
 
-new Alarm(app, "CloudWatchAlarm",{instanceid: "i-0cb9b6ad4c2884163"});
+new Alarm(app, "CloudWatchAlarm",{instanceid: "<instance-id>"});

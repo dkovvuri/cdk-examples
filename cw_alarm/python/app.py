@@ -66,61 +66,6 @@ class CloudWatchAlarm(core.Stack):
             }]
         )
 
-        # # Alternatively using a generalized CfnRsesource
-
-        core.CfnResource(
-            self,
-            id="NetworkThroughputMonitor",
-            type="AWS::CloudWatch::Alarm",
-            properties={
-                "ComparisonOperator": "GreaterThanThreshold",
-                "EvaluationPeriods": 1,
-                "Threshold": 4,
-                "Metrics": [{
-                    "Id": "m1",
-                    "Label": "NetworkOut",
-                    "ReturnData": False,
-                    "MetricStat": {
-                        "Metric": {
-                            "MetricName": "NetworkOut",
-                            "Namespace": "AWS/EC2",
-                            "Dimensions": [{
-                                "Name": "InstanceId",
-                                "Value": instanceid
-                            }]
-                        },
-                        "Period": 300,
-                        "Stat": "Average",
-                        "Unit": "Bytes",
-                    }
-                },
-                    {
-                    "Id": "m2",
-                    "Label": "NetworkIn",
-                    "ReturnData": False,
-                    "MetricStat": {
-                        "Metric": {
-                            "MetricName": "NetworkIn",
-                            "Namespace": "AWS/EC2",
-                            "Dimensions": [{
-                                "Name": "InstanceId",
-                                "Value": instanceid
-                            }]
-                        },
-                        "Period": 300,
-                        "Stat": "Average",
-                        "Unit": "Bytes"
-                    }
-                },
-                    {
-                    "Id": "e1",
-                    "Label": "NetworkUsageinMiB",
-                    "ReturnData": True,
-                    "Expression": "SUM(METRICS())/(1024*1024)",
-                }]
-            },
-        )
-
 
 app = core.App()
 CloudWatchAlarm(app, "cw-alarm-in-python", instanceid="<instance-id>")

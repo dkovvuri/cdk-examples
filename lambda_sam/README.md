@@ -39,3 +39,7 @@ Note: If your template has more than one 'Lambda::Function' resource, you would 
 ```
 sam local invoke SampleFunction7DB1D36A --event events/events.json
 ```
+
+[1] https://github.com/awslabs/aws-sam-cli/blob/master/designs/resource_metadata_overriding.md
+[2] https://github.com/awslabs/aws-sam-cli/pull/1234
+[3] AWS CDK Tools - SAM CLI - https://docs.aws.amazon.com/cdk/latest/guide/tools.html#sam

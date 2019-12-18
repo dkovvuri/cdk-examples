@@ -65,8 +65,8 @@ class CloudFrontStack(core.Stack):
 
 app = core.App()
 
-env = core.Environment(account="675383074689", region="us-east-1")
+env = core.Environment(account="<acct>", region="us-east-1")
 
-CloudFrontStack(app, "DistributionStack", env=env, hostedzoneid="Z62R6N3FQ7WET", hostedzonename="awsels.com", origin_name="Infra-Publi-1LLHKN9PFDXEZ-57518743.us-east-1.elb.amazonaws.com")
+CloudFrontStack(app, "DistributionStack", env=env, hostedzoneid="<hosted-zone>", hostedzonename="<domain>", origin_name="<origin>")
 
 app.synth()

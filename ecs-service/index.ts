@@ -11,9 +11,9 @@ class VPCStack extends cdk.Stack {
     readonly vpc: ec2.IVpc;
     readonly lb: alb.IApplicationLoadBalancer;
 
-    constructor(app: cdk.App, id: string) {
+    constructor(app: cdk.App, id: string, props: cdk.StackProps) {
 
-        super(app, id);
+        super(app, id, props);
 
         this.vpc = new ec2.Vpc(this, 'vpc', { maxAzs: 3, natGateways: 2 });
 
@@ -87,5 +87,7 @@ class ECSStack extends cdk.Stack {
     }
 }
 
-const vpcstack = new VPCStack(app, "VPCStack");
-new ECSStack(app, "ServiceStack", { VPC: vpcstack.vpc, LB: vpcstack.lb });
+
+const envEU  = { account: '441003739754', region: 'ap-east-1' };
+const vpcstack = new VPCStack(app, "VPCStack", {env: envEU});
+new ECSStack(app, "ServiceStack", { env: envEU, VPC: vpcstack.vpc, LB: vpcstack.lb });

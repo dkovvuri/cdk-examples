@@ -34,7 +34,7 @@ export class LambdaStack extends cdk.Stack {
   }
 }
 
-const envUSA  = { account: '', region: '' };
+const envUSA  = { account: '675383074689', region: 'us-east-1' };
 
 const app = new cdk.App;
 new LambdaStack(app, "LambdaStack", { env: envUSA, subnetid:"subnet-0e779bffee9bae12e", vpcid: "vpc-4e352e36"});
